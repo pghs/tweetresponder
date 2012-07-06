@@ -4,10 +4,10 @@ class CreateQuestions < ActiveRecord::Migration
       t.integer :q_id
       t.integer :lesson_id
       t.text :question
-      t.string :answer
+      t.text :answer
       t.text :tweet
-      t.string :url
-      t.string :short_url
+      t.text :url
+      t.text :short_url
 
       t.timestamps
     end

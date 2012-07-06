@@ -11,16 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120706044541) do
+ActiveRecord::Schema.define(:version => 20120706022047) do
 
   create_table "questions", :force => true do |t|
     t.integer  "q_id"
     t.integer  "lesson_id"
     t.text     "question"
-    t.string   "answer"
+    t.text     "answer"
     t.text     "tweet"
-    t.string   "url"
-    t.string   "short_url"
+    t.text     "url"
+    t.text     "short_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -28,18 +28,18 @@ ActiveRecord::Schema.define(:version => 20120706044541) do
   create_table "tweets", :force => true do |t|
     t.integer  "t_id"
     t.integer  "user_id"
+    t.integer  "question_id"
     t.text     "message"
     t.integer  "in_reply_to_status_id"
     t.integer  "in_reply_to_user_id"
+    t.boolean  "answered",              :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "answered",              :default => false
-    t.integer  "question_id"
   end
 
   create_table "users", :force => true do |t|
-    t.string   "t_name"
     t.integer  "t_id"
+    t.string   "t_name"
     t.string   "t_screen_name"
     t.integer  "lifetime_score"
     t.integer  "weekly_score"
