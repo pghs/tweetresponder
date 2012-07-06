@@ -15,10 +15,12 @@ class TweetsController < ApplicationController
 			case params[:correct].to_i
 			when 1
 				puts 'right!'
-				#code for responding to correct tweet goes here
+				#Tweet.post_status("@#{tweet.user.t_screen_name} Correct! #questionhashtag")
 			when 0
 				puts 'wrong!'
-				#code for responding to incorrect tweet goes here
+				#Tweet.post_status(
+				#	"@#{tweet.user.t_screen_name} Sorry, that's not what were looking for. Check out #LINK and click 'teach me' to learn more! #questionhashtag"
+				#)
 			else
 				puts 'skip'
 			end

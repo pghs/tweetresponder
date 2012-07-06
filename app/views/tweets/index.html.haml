@@ -1,8 +1,8 @@
 -@tweets.each do |t|
 	.row.well{:id => t.id}
 		.span5
-			%h5= "@#{t.user.t_screen_name}"
-			%h3= t.message
+			%h5= "@#{t.user.t_screen_name}" if t.user
+			%h3= raw t.message
 		.span3
 			%h3= t.question.answer if t.question
 		.span3

@@ -27,25 +27,24 @@ class Tweet < ActiveRecord::Base
 	end
 
 	def self.check_mentions()
-		tweets = Twitter.mentions({:count => 200}).results
+		tweets = Twitter.mentions({:count => 200})
 		tweets.each do |t|
 			Tweet.save_tweet_data(t)
 		end
+		return true
 	end
 
 	def self.save_tweet_data(t)
-		u = User.find_or_create_by_t_id(t.from_user_id)
-		unless t.from_user_name==u.t_name and u.t_screen_name == t.from_user
-			u.update_attributes(:t_name => t.from_user_name, :t_screen_name => t.from_user)
-		end
-
+		u = User.find_or_create_by_t_id(t.user.id)
+		u.update_attributes(:t_name => t.user.name, :t_screen_name => t.user.screen_name)
+		puts "#{u.id}: #{u.t_screen_name}"
 		tw = Tweet.find_or_create_by_t_id(t.id)
 		unless tw.message == t.text and 
 			tw.in_reply_to_user_id == t.to_user_id and
 			tw.in_reply_to_status_id = t.in_reply_to_status_id and
 			tw.user_id = u.id
 				tw.update_attributes(:message => t.text,
-					:in_reply_to_user_id => t.to_user_id,
+					:in_reply_to_user_id => t.in_reply_to_user_id,
 					:in_reply_to_status_id => t.in_reply_to_status_id,
 					:user_id => u.id)
 		end
