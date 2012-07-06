@@ -21,13 +21,12 @@ group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
   gem 'therubyracer'
-  gem 'twitter-bootstrap-rails'
 end
 
 gem 'haml'
 gem 'devise'
 gem 'rails', '3.1.3'
-
+gem 'twitter-bootstrap-rails'
 gem 'jquery-rails'
 gem 'omniauth'
 gem 'omniauth-oauth2'
