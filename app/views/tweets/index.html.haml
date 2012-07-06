@@ -4,7 +4,7 @@
 			%h5= "@#{t.user.t_screen_name}"
 			%h3= t.message
 		.span3
-			%h3= t.question.answer
+			%h3= t.question.answer if t.question
 		.span3
 			%button.btn.btn-success{:id => t.id} Correct
 			%button.btn.btn-danger{:id => t.id} Incorrect
