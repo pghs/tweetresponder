@@ -34,3 +34,4 @@ gem 'rabl'
 gem 'hirb'
 gem 'twitter'
 gem 'whenever', :require => false
+gem 'url_shortener'

@@ -6,18 +6,6 @@ class Tweet < ActiveRecord::Base
 		where(:answered => false)
 	end
 
-	def self.answered
-		where(:answered => true)
-	end
-
-	def self.get_dms
-		return Twitter.direct_messages()
-	end
-
-	def self.cron
-		puts 'cronned'
-	end
-
 	def self.post_status(msg)
 		if msg.length<141
 			return Twitter.update(msg)
@@ -54,9 +42,11 @@ class Tweet < ActiveRecord::Base
 		if hashtag
 			sp = msg.index(/ /,hashtag)
 			sp = -1 if sp.nil?
-			question_id = msg.slice(hashtag..sp).to_i
+			question_id = msg.slice(hashtag+1..sp).to_i
 			question_id = nil if question_id==0
-			tw.update_attributes(:question_id => question_id)
+			q = nil
+			q = Question.find_by_q_id(question_id) unless question_id.nil?
+			tw.update_attributes(:question_id => q.id) if q
 		end
 	end
 end

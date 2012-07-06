@@ -1,4 +1,19 @@
 class TweetsController < ApplicationController
+	AFFIRMATIVE = [
+		"Correct!",
+		"Right!",
+		"Yes!",
+		"That's it!",
+		"You got it!"
+	]
+
+	COMPLEMENT = [
+		"",
+		"Nice job",
+		"Nicely done",
+		"Awesome",
+		"Way to go"
+	]
 	def index
 		@tweets = Tweet.unanswered
 	end
@@ -14,13 +29,15 @@ class TweetsController < ApplicationController
 			puts params[:correct]
 			case params[:correct].to_i
 			when 1
-				puts 'right!'
-				#Tweet.post_status("@#{tweet.user.t_screen_name} Correct! #questionhashtag")
+				puts "@#{tweet.user.t_screen_name} #{AFFIRMATIVE.sample} #{COMPLEMENT.sample} ##{tweet.question.q_id}"
+				puts "@#{tweet.user.t_screen_name} #{AFFIRMATIVE.sample} #{COMPLEMENT.sample} ##{tweet.question.q_id}".length
+				#Tweet.post_status("@#{tweet.user.t_screen_name} #{AFFIRMATIVE.sample} #{COMPLEMENT.sample} ##{tweet.question.q_id}")
 			when 0
-				puts 'wrong!'
-				#Tweet.post_status(
-				#	"@#{tweet.user.t_screen_name} Sorry, that's not what were looking for. Check out #LINK and click 'teach me' to learn more! #questionhashtag"
-				#)
+				puts "@#{tweet.user.t_screen_name} Sorry, that's not what were looking for. Check out #{tweet.question.short_url} and click 'teach me' to learn more! ##{tweet.question.q_id}"
+				puts "@#{tweet.user.t_screen_name} Sorry, that's not what were looking for. Check out #{tweet.question.short_url} and click 'teach me' to learn more! ##{tweet.question.q_id}".length
+				# Tweet.post_status(
+				# 	"@#{tweet.user.t_screen_name} Sorry, that's not what were looking for. Check out #{tweet.question.short_url} and click 'teach me' to learn more! ##{tweet.question.q_id}"
+				# )
 			else
 				puts 'skip'
 			end
