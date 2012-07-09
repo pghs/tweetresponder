@@ -5,6 +5,6 @@ end
 
 task :tweet => :environment do
 	puts "TWEET RUN"
-	Tweet.send_next_tweet
-	Tweet.set_next
+	Question.send_next_tweet
+	Question.set_next
 end
