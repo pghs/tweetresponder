@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120709143932) do
+ActiveRecord::Schema.define(:version => 20120709144639) do
 
   create_table "questions", :force => true do |t|
     t.integer  "q_id"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20120709143932) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "next"
-    t.string   "tweet_id"
+    t.integer  "tweet_id"
   end
 
   create_table "tweets", :force => true do |t|
@@ -34,9 +34,9 @@ ActiveRecord::Schema.define(:version => 20120709143932) do
     t.boolean  "answered",              :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "in_reply_to_status_id"
-    t.string   "in_reply_to_user_id"
-    t.string   "t_id"
+    t.integer  "in_reply_to_status_id"
+    t.integer  "in_reply_to_user_id"
+    t.integer  "t_id"
   end
 
   create_table "users", :force => true do |t|

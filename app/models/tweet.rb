@@ -28,12 +28,12 @@ class Tweet < ActiveRecord::Base
 		puts "#{u.id}: #{u.t_screen_name}"
 		tw = Tweet.find_or_create_by_t_id(t.id)
 		unless tw.message == t.text and 
-			tw.in_reply_to_user_id == t.in_reply_to_user_id.to_s and
-			tw.in_reply_to_status_id == t.in_reply_to_status_id.to_s and
+			tw.in_reply_to_user_id == t.in_reply_to_user_id and
+			tw.in_reply_to_status_id == t.in_reply_to_status_id and
 			tw.user_id == u.id
 				tw.update_attributes(:message => t.text,
-					:in_reply_to_user_id => t.in_reply_to_user_id.to_s,
-					:in_reply_to_status_id => t.in_reply_to_status_id.to_s,
+					:in_reply_to_user_id => t.in_reply_to_user_id,
+					:in_reply_to_status_id => t.in_reply_to_status_id,
 					:user_id => u.id)
 		end
 
