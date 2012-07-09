@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120709142735) do
+ActiveRecord::Schema.define(:version => 20120709143932) do
 
   create_table "questions", :force => true do |t|
     t.integer  "q_id"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20120709142735) do
     t.datetime "updated_at"
     t.string   "in_reply_to_status_id"
     t.string   "in_reply_to_user_id"
-    t.integer  "t_id"
+    t.string   "t_id"
   end
 
   create_table "users", :force => true do |t|
