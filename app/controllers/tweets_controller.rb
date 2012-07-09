@@ -4,7 +4,8 @@ class TweetsController < ApplicationController
 		"Right!",
 		"Yes!",
 		"That's it!",
-		"You got it!"
+		"You got it!",
+
 	]
 
 	COMPLEMENT = [
@@ -12,7 +13,9 @@ class TweetsController < ApplicationController
 		"Nice job",
 		"Nicely done",
 		"Awesome",
-		"Way to go"
+		"Way to go",
+		"Booyah!",
+		"Keep it up"
 	]
 
 
@@ -31,13 +34,13 @@ class TweetsController < ApplicationController
 			puts params[:correct]
 			case params[:correct].to_i
 			when 1
-				res = Tweet.post_status("@#{tweet.user.t_screen_name} #{AFFIRMATIVE.sample} #{COMPLEMENT.sample} ##{tweet.question.short_url}")
+				res = Tweet.post_status("@#{tweet.user.t_screen_name} #{AFFIRMATIVE.sample} #{COMPLEMENT.sample} #{tweet.question.short_url}")
 				puts res
 				tweet.user.increment(:weekly_score)
 				tweet.user.increment(:lifetime_score)
 			when 0
 				res = Tweet.post_status(
-					"@#{tweet.user.t_screen_name} Sorry, that's not what were looking for. Check out #{tweet.question.short_url} and click 'teach me' to learn more! ##{tweet.question.q_id}"
+					"@#{tweet.user.t_screen_name} Sorry, that's not what were looking for. Check out #{tweet.question.short_url} and click 'teach me' to learn more!"
 				)
 				puts res
 			else
