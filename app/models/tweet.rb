@@ -40,6 +40,15 @@ class Tweet < ActiveRecord::Base
 		if tw.in_reply_to_status_id
 			q = Question.find_by_tweet_id(tw.in_reply_to_status_id)
 			tw.update_attributes(:question_id => q.id) if q
+		elsif tw.message =~ /bit.ly/
+			msg = tw.message
+			link_pos = msg =~ /bit.ly/
+			sp = msg.index(/ /,link_pos)
+			sp = -1 if sp.nil?
+			bitly_link = msg.slice(link_pos..sp)
+			q = nil
+			q = Question.find_by_short_url("http://#{bitly_link}") unless bitly_link.nil?
+			tw.update_attributes(:question_id => q.id) if q
 		else
 			msg = tw.message
 			hashtag = msg =~ /#/

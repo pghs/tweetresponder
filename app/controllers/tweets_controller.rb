@@ -31,7 +31,7 @@ class TweetsController < ApplicationController
 			puts params[:correct]
 			case params[:correct].to_i
 			when 1
-				res = Tweet.post_status("@#{tweet.user.t_screen_name} #{AFFIRMATIVE.sample} #{COMPLEMENT.sample} ##{tweet.question.q_id}")
+				res = Tweet.post_status("@#{tweet.user.t_screen_name} #{AFFIRMATIVE.sample} #{COMPLEMENT.sample} ##{tweet.question.short_url}")
 				puts res
 				tweet.user.increment(:weekly_score)
 				tweet.user.increment(:lifetime_score)
