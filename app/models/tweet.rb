@@ -37,16 +37,21 @@ class Tweet < ActiveRecord::Base
 					:user_id => u.id)
 		end
 
-		msg = tw.message
-		hashtag = msg =~ /#/
-		if hashtag
-			sp = msg.index(/ /,hashtag)
-			sp = -1 if sp.nil?
-			question_id = msg.slice(hashtag+1..sp).to_i
-			question_id = nil if question_id==0
-			q = nil
-			q = Question.find_by_q_id(question_id) unless question_id.nil?
+		if tw.in_reply_to_status_id
+			q = Question.find_by_tweet_id(tw.in_reply_to_status_id)
 			tw.update_attributes(:question_id => q.id) if q
+		else
+			msg = tw.message
+			hashtag = msg =~ /#/
+			if hashtag
+				sp = msg.index(/ /,hashtag)
+				sp = -1 if sp.nil?
+				question_id = msg.slice(hashtag+1..sp).to_i
+				question_id = nil if question_id==0
+				q = nil
+				q = Question.find_by_q_id(question_id) unless question_id.nil?
+				tw.update_attributes(:question_id => q.id) if q
+			end
 		end
 	end
 end
