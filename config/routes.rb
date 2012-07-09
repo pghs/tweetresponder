@@ -1,5 +1,7 @@
 Tweetchecker::Application.routes.draw do
 
+  get "users/index"
+
   resources :questions
 
 	match '/tweet/check' => 'tweets#check'

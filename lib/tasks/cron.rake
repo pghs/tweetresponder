@@ -4,6 +4,7 @@ task :check_mentions => :environment do
 end
 
 task :tweet => :environment do
+	puts "TWEET RUN"
 	Tweet.send_next_tweet
 	Tweet.set_next
 end

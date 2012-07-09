@@ -1,0 +1,8 @@
+%h1 User Stats
+-@users.each do |u|
+	.row.well{:id => u.id}
+		%h3= "@#{u.t_screen_name}"
+		.span3
+			%h5= u.tweets.last.message
+		.span2
+			%h5= u.tweets.last.updated_at

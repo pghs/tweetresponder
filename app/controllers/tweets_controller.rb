@@ -31,13 +31,15 @@ class TweetsController < ApplicationController
 			puts params[:correct]
 			case params[:correct].to_i
 			when 1
-				puts "@#{tweet.user.t_screen_name} #{AFFIRMATIVE.sample} #{COMPLEMENT.sample} ##{tweet.question.q_id}"
-				Tweet.post_status("@#{tweet.user.t_screen_name} #{AFFIRMATIVE.sample} #{COMPLEMENT.sample} ##{tweet.question.q_id}")
+				res = Tweet.post_status("@#{tweet.user.t_screen_name} #{AFFIRMATIVE.sample} #{COMPLEMENT.sample} ##{tweet.question.q_id}")
+				puts res
+				tweet.user.increment(:weekly_score)
+				tweet.user.increment(:lifetime_score)
 			when 0
-				puts "@#{tweet.user.t_screen_name} Sorry, that's not what were looking for. Check out #{tweet.question.short_url} and click 'teach me' to learn more! ##{tweet.question.q_id}"
-				Tweet.post_status(
+				res = Tweet.post_status(
 					"@#{tweet.user.t_screen_name} Sorry, that's not what were looking for. Check out #{tweet.question.short_url} and click 'teach me' to learn more! ##{tweet.question.q_id}"
 				)
+				puts res
 			else
 				puts 'skip'
 			end
