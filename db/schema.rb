@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120706211654) do
+ActiveRecord::Schema.define(:version => 20120709142735) do
 
   create_table "questions", :force => true do |t|
     t.integer  "q_id"
@@ -24,11 +24,10 @@ ActiveRecord::Schema.define(:version => 20120706211654) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "next"
-    t.integer  "tweet_id"
+    t.string   "tweet_id"
   end
 
   create_table "tweets", :force => true do |t|
-    t.integer  "t_id"
     t.integer  "user_id"
     t.integer  "question_id"
     t.text     "message"
@@ -37,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20120706211654) do
     t.datetime "updated_at"
     t.string   "in_reply_to_status_id"
     t.string   "in_reply_to_user_id"
+    t.integer  "t_id"
   end
 
   create_table "users", :force => true do |t|
