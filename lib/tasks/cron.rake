@@ -4,9 +4,6 @@ task :check_mentions => :environment do
 end
 
 task :tweet => :environment do
-  t = Time.now
-	if t.hour > 7 and t.hour < 21
-		Tweet.send_next_tweet
-		Tweet.set_next
-	end
+	Tweet.send_next_tweet
+	Tweet.set_next
 end
